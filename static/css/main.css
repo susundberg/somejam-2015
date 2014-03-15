@@ -112,6 +112,12 @@ h1 {
     font-size: 20px;
     text-align: center;
     color: #3c3539;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
 }
 
 #ryhmät, #kahdenkeskeiset {
