@@ -100,7 +100,7 @@ body {
     font-family: sans-serif;
     background-color: #d9c681;
     vertical-align: middle;
-    background-image: url("../pallot.jpg");
+    background-image: url("/img/pallot.jpg");
     background-size: 100%;
 }
 h1 {

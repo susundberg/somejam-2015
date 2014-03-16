@@ -1,0 +1,35 @@
+{% autoescape true %}
+{
+  ryhmät : [
+    {% for feed in feeds %}
+      {% if feed.type == "group" %}
+      {
+         nimi: "{{ feed.name }}",
+         linkki: "{{ feed.link }}",
+         kuvaus: "{{ feed.desc }}",
+         {% if feed.open != None %} 
+           opens: "{{ feed.open }}",
+           closes: "{{ feed.close }}",
+         {% endif %}   
+      },   
+      {% endif %}
+    {% endfor %}
+    ],
+ kahdenkeskeiset : [
+    {% for feed in feeds %}
+      {% if feed.type != "group" %}
+      {
+         nimi: "{{ feed.name }}",
+         linkki: "{{ feed.link }}",
+         kuvaus: "{{ feed.desc }}",
+         {% if feed.open != None %} 
+           opens: "{{ feed.open }}",
+           closes: "{{ feed.close }}",
+         {% endif %}   
+      },   
+      {% endif %}
+    {% endfor %}
+    ],
+}
+{% endautoescape %}
+
