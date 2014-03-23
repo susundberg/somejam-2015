@@ -130,7 +130,7 @@ class AdminPage(webapp2.RequestHandler):
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/json', JsonPage),
-    ('/admin', AdminPage),
+    #('/admin', AdminPage),
     ('/update', UpdatePage),
     ], debug=True)
 
