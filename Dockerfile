@@ -9,4 +9,8 @@ RUN apt-get -y --no-install-recommends  install python-django python-psycopg2 gu
 RUN pip install django-toolbelt
 
 RUN apt-get -y --no-install-recommends  install nano
+RUN chsh --shell /bin/bash www-data 
+
+
+
 
