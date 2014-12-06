@@ -2,9 +2,6 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'u_1c@-fsd3n)a^+cizwd$1d^wqbv&b-zq=-2-e==fd(k=z72vv'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 TEMPLATE_DEBUG = True
@@ -86,3 +83,11 @@ if len(DATABASES["default"]) == 0 :
 
 
 INSTALLED_APPS.append("chat_info")
+
+from settings_secret import *
+
+if "SECRET_KEY" not in locals():
+  raise Exception("Your settings_secret.py is not valid")
+
+
+
