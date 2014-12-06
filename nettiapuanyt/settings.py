@@ -13,14 +13,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-)
+]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,7 +53,10 @@ USE_TZ = True
 #
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
+
 DATABASES = { 'default' : dj_database_url.config() }
+
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -70,3 +73,16 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+#
+# This is for local testing
+if len(DATABASES["default"]) == 0 :
+    DATABASES["default"] = { 
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+          'NAME': 'djangodb',
+          'USER': 'www-data',
+    }
+
+
+INSTALLED_APPS.append("chat_info")
