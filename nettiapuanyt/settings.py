@@ -89,7 +89,8 @@ INSTALLED_APPS.append("chat_event")
 
 TEMPLATE_DIRS = ("templates/",)
 STATICFILES_DIRS = ("static/",)
-  
+TIME_ZONE = "Europe/Helsinki"  
+
 from settings_secret import *
 if "SECRET_KEY" not in locals():
   raise Exception("Your settings_secret.py is not valid")

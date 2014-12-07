@@ -13,8 +13,8 @@
   <tbody>
    {% for obj in object_list %}
     <tr> 
-      <th> {{ obj.open }} </th>
-      <th> {{ obj.close }} </th>
+      <th> {{ obj.open|date:"SHORT_DATETIME_FORMAT" }} </th>
+      <th> {{ obj.close|date:"SHORT_DATETIME_FORMAT"  }} </th>
       <th> {{ obj.chat.name }} </th>
     </tr>
    {% endfor %}
