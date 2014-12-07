@@ -87,9 +87,13 @@ if len(DATABASES["default"]) == 0 :
 INSTALLED_APPS.append("chat_info")
 INSTALLED_APPS.append("chat_event")
 
+TEMPLATE_DIRS = ("templates/",)
+STATICFILES_DIRS = ("static/",)
+  
 from settings_secret import *
 if "SECRET_KEY" not in locals():
   raise Exception("Your settings_secret.py is not valid")
+
 
 
 

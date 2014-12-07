@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Next active chats: </h1>
+
+<table class="table">
+  <thead>
+    <tr> 
+      <th> Opens </th>
+      <th> Closes </th>
+      <th> Name </th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for obj in object_list %}
+    <tr> 
+      <th> {{ obj.open }} </th>
+      <th> {{ obj.close }} </th>
+      <th> {{ obj.chat.name }} </th>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
