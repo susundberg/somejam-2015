@@ -81,11 +81,12 @@ if len(DATABASES["default"]) == 0 :
           'USER': 'www-data',
     }
 
-
+#
+# Local settings
+#
 INSTALLED_APPS.append("chat_info")
 
 from settings_secret import *
-
 if "SECRET_KEY" not in locals():
   raise Exception("Your settings_secret.py is not valid")
 

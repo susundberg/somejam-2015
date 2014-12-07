@@ -2,15 +2,30 @@
 import requests
 import bs4
 
-
-
-NUSUVEFO_BASE = "http://www.verke.org"
-TARGET_URL = NUSUVEFO_BASE + "/nusuvefo-kalenteri"
-LOGIN_URL = NUSUVEFO_BASE + "/kirjaudu"
-
-
 class FetchError(Exception):
   pass
+
+import os
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'nettiapuanyt.settings'
+
+from django.conf import settings
+
+#except ImportError:
+  #from nettiapuanyt import settings_secret 
+
+  #class Settings:
+    #pass
+  #settings = Settings()
+  #settings.SECRET_KEY = 'YtJFtu1fiufaa1cEqDdjxJUQ8PhQJI7zAdA77uz9x5narF4gLX'
+  #settings.NUSUVEFO_USERNAME = "supauli"
+  #settings.NUSUVEFO_PASSWORD = "578NF96oB6bv52PS"
+  #settings.NUSUVEFO_BASE = "http://www.verke.org"
+
+
+LOGIN_URL = settings.NUSUVEFO_BASE + "/kirjaudu"
+CALENDER_URL= settings.NUSUVEFO_BASE + "/nusuvefo-kalenteri?task=ical.download&id=%d"
+
 
 
 class Nusu:
@@ -44,11 +59,11 @@ class Nusu:
 
     hidden_inputs = forms[0].findAll("input", {'type':'hidden'})
 
-    payload = { 'username' : NUSUVEFO_USERNAME, 'password' : NUSUVEFO_PASSWORD }
+    payload = { 'username' : settings.NUSUVEFO_USERNAME, 'password' : settings.NUSUVEFO_PASSWORD }
     for hidden in hidden_inputs:
       payload[ hidden["name"]] = hidden["value"]
       
-    resp = self.session.post( NUSUVEFO_BASE + login_url, payload )
+    resp = self.session.post( settings.NUSUVEFO_BASE + login_url, payload )
     soup = self.get_and_parse( None, resp=resp )
     sys = soup.findAll("div", {'id':'system'})
     
@@ -68,11 +83,14 @@ class Nusu:
       url = entry.a["href"]
       entries.append( ( name, url ))
     self.entries = entries
+       
+  def get_ical( self, calender_id ):
+    resp = self.session.get( CALENDER_URL % calender_id )
+    if resp.status_code != 200:
+      raise FetchError("Fetch to '%s' returned != 200" % url )
+    return resp.content
+    
 
 
 
-n = Nusu()
-n.login()
-n.get_calendenders()
-print "GOT:" + str(n.entries)
 
