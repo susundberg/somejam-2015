@@ -85,6 +85,7 @@ if len(DATABASES["default"]) == 0 :
 # Local settings
 #
 INSTALLED_APPS.append("chat_info")
+INSTALLED_APPS.append("chat_event")
 
 from settings_secret import *
 if "SECRET_KEY" not in locals():

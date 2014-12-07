@@ -1,0 +1,60 @@
+[
+{
+  "pk": 1, 
+  "model": "chat_info.chattype", 
+  "fields": {
+    "name": "One-to-one"
+  }
+},
+{
+  "pk": 2, 
+  "model": "chat_info.chattype", 
+  "fields": {
+    "name": "Group-chat"
+  }
+},
+{
+  "pk": 3, 
+  "model": "chat_info.chattype", 
+  "fields": {
+    "name": "Forum-like"
+  }
+},
+{
+  "pk": 4, 
+  "model": "chat_info.chattype", 
+  "fields": {
+    "name": "Unknown type"
+  }
+},
+{
+  "pk": 1, 
+  "model": "chat_info.chat", 
+  "fields": {
+    "explain": "NETARI CHAT HERE", 
+    "remote_id": 14, 
+    "type": 1, 
+    "name": "Netari"
+  }
+},
+{
+  "pk": 2, 
+  "model": "chat_info.chat", 
+  "fields": {
+    "explain": "Bystr\u00f6m here", 
+    "remote_id": 15, 
+    "type": 2, 
+    "name": "Bystr\u00f6m"
+  }
+},
+{
+  "pk": 3, 
+  "model": "chat_info.chat", 
+  "fields": {
+    "explain": "Verkkoterkkarit explain here long long", 
+    "remote_id": 13, 
+    "type": 3, 
+    "name": "Verkkoterkkarit"
+  }
+}
+]

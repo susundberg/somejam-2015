@@ -1,35 +1,18 @@
-
 import requests
 import bs4
+import re
+
+from django.conf import settings
+
+LOGIN_URL    = settings.NUSUVEFO_BASE + "/kirjaudu"
+CALENDER_URL = settings.NUSUVEFO_BASE + "/nusuvefo-kalenteri?task=ical.download&id=%s"
+CALENDER_PATTERN = r"/nusuvefo-kalenteri\?task=ical\.download\&id=(\d+)"
+TARGET_URL   = settings.NUSUVEFO_BASE + "/nusuvefo-kalenteri"
 
 class FetchError(Exception):
   pass
 
-import os
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'nettiapuanyt.settings'
-
-from django.conf import settings
-
-#except ImportError:
-  #from nettiapuanyt import settings_secret 
-
-  #class Settings:
-    #pass
-  #settings = Settings()
-  #settings.SECRET_KEY = 'YtJFtu1fiufaa1cEqDdjxJUQ8PhQJI7zAdA77uz9x5narF4gLX'
-  #settings.NUSUVEFO_USERNAME = "supauli"
-  #settings.NUSUVEFO_PASSWORD = "578NF96oB6bv52PS"
-  #settings.NUSUVEFO_BASE = "http://www.verke.org"
-
-
-LOGIN_URL = settings.NUSUVEFO_BASE + "/kirjaudu"
-CALENDER_URL= settings.NUSUVEFO_BASE + "/nusuvefo-kalenteri?task=ical.download&id=%d"
-
-
-
 class Nusu:
-  
   def __init__(self):
     self.session = requests.Session()
     pass
@@ -69,7 +52,6 @@ class Nusu:
     
     if len(sys)!=1:
       raise FetchError("Login failed probably: %s " % resp.content )
-    
 
   def get_calendenders(self):
     soup = self.get_and_parse(TARGET_URL)
@@ -78,11 +60,17 @@ class Nusu:
       raise FetchError("Invalid number of containers: %d " % len(containers) )
     container = containers[0]
     entries = []
+    url_pattern = re.compile( CALENDER_PATTERN, re.I )
+    
     for entry in container.findAll("dt"):
       name = entry.font.string.strip()
       url = entry.a["href"]
-      entries.append( ( name, url ))
-    self.entries = entries
+      url_match = url_pattern.match( url )
+      if url_match:
+         entries.append( ( name, url_match.group(1) ) )
+      else:
+         print "Warning: did not match:" + url
+    return entries
        
   def get_ical( self, calender_id ):
     resp = self.session.get( CALENDER_URL % calender_id )
