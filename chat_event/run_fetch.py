@@ -98,7 +98,7 @@ class Provider:
         dt_from = datetime.datetime.now() - datetime.timedelta( days = 1  )
       
       if dt_until == None:
-        dt_until = datetime.datetime.now() + datetime.timedelta( days = 2 )
+        dt_until = datetime.datetime.now() + datetime.timedelta( days = 7 )
         
       target = CALENDER_JSON_URL % { 'calid' : calid, 
                                      'from'  : self._dt_to_timestamp( dt_from ), 

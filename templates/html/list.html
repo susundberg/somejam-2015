@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+$( document ).ready(function() {
+
+
+  var REMOTE_HOST="http://localhost:5000/json/v1/";
+  
+  
+  function show_entry(index, value)
+  {
+    var to_add = $("#chat_empty_row").html()
+    to_add = to_add.replace("__OPEN__", value["open"]);
+    to_add = to_add.replace("__NAME__", value["name"]);
+    
+    $("#chat_body").append( "<tr class='chat_info' > " + to_add + " </tr> " );
+  }
+  
+  $.ajax({
+    url: REMOTE_HOST,
+    dataType: "json" } )
+    .done( function (data) {
+            $.each(data, show_entry )
+           })
+    .error( function() 
+           { 
+             $("#div_error").show(); 
+           });
+  });
+  console.log("WTF");
+</script>
+</head>
+
+
+<body>
+<h1> Next active chats: </h1>
+<div style="display:none">
+  <span id="icon_yes" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+  <span id="icon_no" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> 
+</div>
+
+<div id="div_error" style="display:none">
+<p> There seems to be some problems with the service .. </p>
+</div>
+
+
+<table id="chat_table">
+  <thead>
+    <tr> 
+      <th> </th>
+      <th> Opens </th>
+      <th> Closes </th>
+      <th> Name </th>
+    </tr>
+  </thead>
+  <tbody id="chat_body">
+   <tr style="display:none" id="chat_empty_row">
+      <td class="row_icon"> __ICON__ </th>
+      <td class="row_open"> __OPEN__ </th>
+      <td class="row_close">__CLOSE__ </th>
+      <td class="row_name"> __NAME__ </th>
+   </tr>
+  </tbody>
+</table>
+
+</body>
+
+</html>
