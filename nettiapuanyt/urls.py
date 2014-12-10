@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', chat_event.views.ArticleListView.as_view()),
+    url(r'^html/$', chat_event.views.ArticleListView.as_view()),
+    url(r'^json/v1/$', chat_event.views.json_feed),
 )

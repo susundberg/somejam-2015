@@ -14,7 +14,7 @@ class Command(BaseCommand):
       if len(args)  > 0 :
          raise CommandError('This command accepts no paramters')
       
-      fetcher = chat_event.run_fetch.Nusu()
+      fetcher = chat_event.run_fetch.Provider()
       fetcher.login()
       chat_type = chat_info.models.ChatType.objects.get( name="Unknown type")
       
@@ -25,6 +25,8 @@ class Command(BaseCommand):
                   name = cal_name,
                   remote_id = cal_id,
                   defaults = {
-                     'explain' : "Automatically fetched.. Replace me..",
-                     'type' : chat_type }
+                     'type'    : chat_type,
+                     'url'     : 'http://www.google.com',
+                     'desc'    : 'Automatically fetched, replace me!',
+                     }
                   )

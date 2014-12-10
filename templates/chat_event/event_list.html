@@ -5,6 +5,7 @@
 <table class="table">
   <thead>
     <tr> 
+      <th> </th>
       <th> Opens </th>
       <th> Closes </th>
       <th> Name </th>
@@ -12,7 +13,13 @@
   </thead>
   <tbody>
    {% for obj in object_list %}
-    <tr> 
+   <tr>
+    {% if dt_now > obj.open and dt_now < obj.close %}
+       <th> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> </th>
+    {% else %}
+       <th> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> </th>
+    {% endif %}
+    
       <th> {{ obj.open|date:"SHORT_DATETIME_FORMAT" }} </th>
       <th> {{ obj.close|date:"SHORT_DATETIME_FORMAT"  }} </th>
       <th> {{ obj.chat.name }} </th>
