@@ -3,8 +3,6 @@ from django.core.management.base import BaseCommand, CommandError
 import chat_info.models
 import chat_event.run_fetch
 
-import icalendar
-
 
 class Command(BaseCommand):
     help = 'Does update for all the registered calenders'

@@ -1,6 +1,9 @@
 #!/bin/bash
 
+set -e
+set -x
 
+/etc/init.d/postgresql start
 
 createdb djangodb
 
