@@ -11,7 +11,7 @@ Buzzwords: heroku, docker, django, python, bootstrap, jquery
 
 ## Deployed version
 
-For now its running at http://enigmatic-harbor-4948.herokuapp.com/
+For now its running at http://nettiapu.herokuapp.com/
 
 It does scheduled (for every 30min):
 * Pull JSON feeds for each registered calendar from nusuvefo website
