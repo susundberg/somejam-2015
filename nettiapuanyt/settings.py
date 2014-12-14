@@ -37,13 +37,14 @@ WSGI_APPLICATION = 'nettiapuanyt.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 
+SHORT_DATETIME_FORMAT="d.M H:i"
 
 #
 # Heroku specific stuff
@@ -62,7 +63,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
@@ -89,9 +90,18 @@ INSTALLED_APPS.append("chat_event")
 
 TEMPLATE_DIRS = ("templates/",)
 STATICFILES_DIRS = ("static/",)
-TIME_ZONE = "Europe/Helsinki"  
 
-from settings_secret import *
+TIME_ZONE = "Europe/Helsinki"  
+LANGUAGE_CODE = 'fi-fi'
+NUSUVEFO_BASE = "http://www.verke.org"
+
+if os.getenv("SECRET_KEY",None) :
+     SECRET_KEY = os.environ["SECRET_KEY"] 
+     NUSUVEFO_USERNAME = os.environ["NUSUVEFO_USERNAME"] 
+     NUSUVEFO_PASSWORD = os.environ["NUSUVEFO_PASSWORD"]
+else:
+   from settings_secret import *
+   
 if "SECRET_KEY" not in locals():
   raise Exception("Your settings_secret.py is not valid")
 
