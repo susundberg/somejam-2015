@@ -2,11 +2,6 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -99,8 +94,13 @@ if os.getenv("SECRET_KEY",None) :
      SECRET_KEY = os.environ["SECRET_KEY"] 
      NUSUVEFO_USERNAME = os.environ["NUSUVEFO_USERNAME"] 
      NUSUVEFO_PASSWORD = os.environ["NUSUVEFO_PASSWORD"]
+     DEBUG = False
+     TEMPLATE_DEBUG = False
 else:
+   # Debug enviroment ..
    from settings_secret import *
+   DEBUG = True
+   TEMPLATE_DEBUG = True
    
 if "SECRET_KEY" not in locals():
   raise Exception("Your settings_secret.py is not valid")
