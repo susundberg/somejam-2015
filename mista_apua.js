@@ -6,7 +6,7 @@ var jQuery;
 var link_tag = document.createElement('link');
   link_tag.setAttribute("type", "text/css");
   link_tag.setAttribute("rel", "stylesheet");
-  link_tag.setAttribute("href", "https://yui.yahooapis.com/pure/0.6.0/pure-min.css");
+  link_tag.setAttribute("href", "https://cdn.rawgit.com/yahoo/pure-release/v0.6.0/pure-min.css");
   link_tag.onload = styleLoadHandler;
   (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(link_tag);
 
