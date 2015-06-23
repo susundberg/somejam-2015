@@ -50,7 +50,14 @@ jQuery(document).ready(function($) {
      var params = [ api_key, "fields=location" ];
      var get_url = base_url + "/" + event_id + "/" +  "?" + params.join("&");
      $.getJSON( get_url, function( data ) { 
-       $("#" + event_id ).attr("href", data["location"] );
+       var target_url = data["location"];
+       // Make sure we dont get relative links .. 
+       if ( target_url.slice(0,4) != "http" )
+       {
+         target_url = "http://" + target_url;
+       }
+          
+       $("#" + event_id ).attr("href",  target_url );
      } );
   }
   
