@@ -8,7 +8,7 @@
 (function (window, document) {
   var loader = function () {
     var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
-    script.src = "./mista_apua.js";
+    script.src = "https://rawgit.com/susundberg/somejam-2015/master/mista_apua.js";
     tag.parentNode.insertBefore(script, tag);
   };
   window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
