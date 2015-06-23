@@ -6,14 +6,14 @@ var jQuery;
 var link_tag = document.createElement('link');
   link_tag.setAttribute("type", "text/css");
   link_tag.setAttribute("rel", "stylesheet");
-  link_tag.setAttribute("href", "//yui.yahooapis.com/pure/0.6.0/pure-min.css");
+  link_tag.setAttribute("href", "https://yui.yahooapis.com/pure/0.6.0/pure-min.css");
   link_tag.onload = styleLoadHandler;
   (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(link_tag);
 
 // From http://alexmarandon.com/articles/web_widget_jquery/
 var script_tag = document.createElement('script');
   script_tag.setAttribute("type", "text/javascript");
-  script_tag.setAttribute("src", "//code.jquery.com/jquery-1.11.1.min.js");
+  script_tag.setAttribute("src", "https://code.jquery.com/jquery-1.11.1.min.js");
   script_tag.onload = scriptLoadHandler;
   (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
 
