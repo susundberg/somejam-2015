@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
   // by its id. This creates lots of queries .. 
   function event_get_location( event_id )
   {
-     var params = [ api_key, "fields=location" ];
+     var params = [ api_key, "fields=description,location" ];
      var get_url = base_url + "/" + event_id + "/" +  "?" + params.join("&");
      $.getJSON( get_url, function( data ) { 
        var target_url = data["location"];
@@ -56,8 +56,9 @@ jQuery(document).ready(function($) {
        {
          target_url = "http://" + target_url;
        }
-          
-       $("#" + event_id ).attr("href",  target_url );
+       var elem = $("#" + event_id );   
+       elem.attr("href",  target_url );
+       elem.attr("title", data["description"]);
      } );
   }
   
