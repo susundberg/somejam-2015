@@ -21,7 +21,6 @@ var script_tag = document.createElement('script');
 
 var doc_head = (document.getElementsByTagName("head")[0] || document.documentElement);
 doc_head.appendChild( create_link_tag( "https://cdn.rawgit.com/yahoo/pure-release/v0.6.0/pure-min.css" ) );
-doc_head.appendChild( create_link_tag( "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" ) );
 doc_head.appendChild(script_tag);
 
 // Called once jQuery has loaded 
@@ -82,7 +81,7 @@ jQuery(document).ready(function($) {
          return;
        }
      
-       var elems = [ "<a class='pure-button' id='"+val.id+"' style='width:100%;'> " + val.summary + "</a>" , "<i class='fa fa-users'></i>" ];
+       var elems = [ "<a class='pure-button' id='"+val.id+"' style='width:100%;'> " + val.summary + "</a>" ];
        table_items.push( "<td style='border-left:none;'> " + elems.join("</td><td style='border-left:none;'>") + "</td>" );
        event_get_location( val.id );
     });
