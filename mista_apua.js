@@ -53,7 +53,6 @@ jQuery(document).ready(function($) {
      var get_url = base_url + "/" + event_id + "/" +  "?" + params.join("&");
      $.getJSON( get_url, function( data ) { 
        var elem = $("#" + event_id );   
-       console.log(JSON.stringify(data));
        var target_url = data["location"];
        if ( target_url ) // Avoid errors if somebody forgets to update the location
        {
