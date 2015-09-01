@@ -1,8 +1,16 @@
 (function() {
 
 // Localize jQuery variable
+  
 var jQuery;
+var LANG = "fi";
 
+function get_localized_string( string ) 
+{
+  var LOCAL_STRINGS = { "fi" : { "NO_OPEN" : "Ei avoimia palveluita" } };
+  
+  return LOCAL_STRINGS[LANG][string];
+}
 
 function create_link_tag( url )
 {
@@ -84,6 +92,11 @@ jQuery(document).ready(function($) {
        table_items.push( "<td style='border-left:none;'> " + elems.join("</td><td style='border-left:none;'>") + "</td>" );
        event_get_location( val.id );
     });
+    if ( table_items.length == 0 )
+    {
+       table_items.push( "<td style='border-left:none;'><div style='width:100%;' class='pure-button'> " + 
+                           get_localized_string("NO_OPEN") + "</div> </td>" );
+    }
     $("#mistaapua").append("<table class='pure-table'> <tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
    }); // get json
      
