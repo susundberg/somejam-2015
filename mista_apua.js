@@ -4,13 +4,20 @@
   
 var jQuery;
 var LANG = "fi";
+var CALENDER_ID = "l7fs5ste4bllsanrtclmbnpvks%40group.calendar.google.com";
 
 function get_localized_string( string ) 
 {
-  var LOCAL_STRINGS = { "fi" : { "NO_OPEN" : "Ei avoimia palveluita" } };
+  var LOCAL_STRINGS = { "fi" : { "NO_OPEN" : "Ei avoimia palveluita", 
+                                 "HEADER"  : "Nyt avoinna olevat chatit:" 
+                               } 
+                      };
   
   return LOCAL_STRINGS[LANG][string];
 }
+
+
+
 
 function create_link_tag( url )
 {
@@ -43,10 +50,9 @@ function scriptLoadHandler() {
 function main() { 
 jQuery(document).ready(function($) { 
   var now = new Date().getTime();
-  
   var api_key  = "key=AIzaSyD4q8fMwUE0IsaVJ4vLS2vbl1qHvDx0ERs";
-  var base_url = "https://www.googleapis.com/calendar/v3/calendars/l7fs5ste4bllsanrtclmbnpvks%40group.calendar.google.com/events";
-  
+  var base_url = "https://www.googleapis.com/calendar/v3/calendars/" + CALENDER_ID + "/events";
+  var human_url = "https://www.google.com/calendar/embed?src=" + CALENDER_ID + "&ctz=Europe/Helsinki"
   filter_max   = new Date( now + 2*24*60*60*1000 );
   filter_min   = new Date( now );
 
@@ -94,10 +100,11 @@ jQuery(document).ready(function($) {
     });
     if ( table_items.length == 0 )
     {
-       table_items.push( "<td style='border-left:none;'><div style='width:100%;' class='pure-button'> " + 
+       table_items.push( "<td style='border-left:none;'><a style='width:100%;' class='pure-button' href='" + human_url  + "'> " + 
                            get_localized_string("NO_OPEN") + "</div> </td>" );
     }
-    $("#mistaapua").append("<table class='pure-table'> <tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
+    var table_head = get_localized_string("HEADER") 
+    $("#mistaapua").append("<table class='pure-table'> <thead><tr><th>" + table_head + "</th></td></thead><tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
    }); // get json
      
   }); // document ready
