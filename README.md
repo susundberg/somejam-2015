@@ -14,4 +14,5 @@ Include the script-inclusion as is done in the example file index.html between t
 
 The 'div' tag inside the include is where the table will be injected. Place it well.
 
+An example site showing the widget is the index.html itself via rawgit: https://rawgit.com/susundberg/somejam-2015/master/index.html
 
