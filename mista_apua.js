@@ -5,6 +5,9 @@
 var jQuery;
 var LANG = "fi";
 var CALENDER_ID = "l7fs5ste4bllsanrtclmbnpvks%40group.calendar.google.com";
+var BACKGROUND_COLOR = "#95C807"
+var BUTTON_STYLE="width:100%;background-color:"+BACKGROUND_COLOR + ";color:#FFFFFF;";
+var HEADER_STYLE="background-color:"+BACKGROUND_COLOR + ";color:#FFFFFF;";
 
 function get_localized_string( string ) 
 {
@@ -93,18 +96,18 @@ jQuery(document).ready(function($) {
          // skip all events that are not open right now
          return;
        }
-     
-       var elems = [ "<a class='pure-button' id='"+val.id+"' style='width:100%;'> " + val.summary + "</a>" ];
+        
+       var elems = [ "<a class='pure-button' id='"+val.id+"' style='" + BUTTON_STYLE + "'> " + val.summary + "</a>" ];
        table_items.push( "<td style='border-left:none;'> " + elems.join("</td><td style='border-left:none;'>") + "</td>" );
        event_get_location( val.id );
     });
     if ( table_items.length == 0 )
     {
-       table_items.push( "<td style='border-left:none;'><a style='width:100%;' class='pure-button' href='" + human_url  + "'> " + 
+       table_items.push( "<td style='border-left:none;'><a style='" + BUTTON_STYLE + "' class='pure-button' href='" + human_url  + "'> " + 
                            get_localized_string("NO_OPEN") + "</div> </td>" );
     }
     var table_head = get_localized_string("HEADER") 
-    $("#mistaapua").append("<table class='pure-table'> <thead><tr><th>" + table_head + "</th></td></thead><tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
+    $("#mistaapua").append("<table class='pure-table'> <thead><tr style='" + HEADER_STYLE + "' ><th >" + table_head + "</th></td></thead><tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
    }); // get json
      
   }); // document ready
