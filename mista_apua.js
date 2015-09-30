@@ -5,9 +5,6 @@
 var jQuery;
 var LANG = "fi";
 var CALENDER_ID = "l7fs5ste4bllsanrtclmbnpvks%40group.calendar.google.com";
-var BACKGROUND_COLOR = "#95C807"
-var BUTTON_STYLE="width:100%;background-color:"+BACKGROUND_COLOR + ";color:#FFFFFF;";
-var HEADER_STYLE="background-color:"+BACKGROUND_COLOR + ";color:#FFFFFF;";
 
 function get_localized_string( string ) 
 {
@@ -18,8 +15,6 @@ function get_localized_string( string )
   
   return LOCAL_STRINGS[LANG][string];
 }
-
-
 
 
 function create_link_tag( url )
@@ -36,6 +31,7 @@ var script_tag = document.createElement('script');
   script_tag.setAttribute("type", "text/javascript");
   script_tag.setAttribute("src", "https://code.jquery.com/jquery-1.11.1.min.js");
   script_tag.onload = scriptLoadHandler;
+
 
 var doc_head = (document.getElementsByTagName("head")[0] || document.documentElement);
 doc_head.appendChild( create_link_tag( "https://cdn.rawgit.com/yahoo/pure-release/v0.6.0/pure-min.css" ) );
@@ -56,6 +52,15 @@ jQuery(document).ready(function($) {
   var api_key  = "key=AIzaSyD4q8fMwUE0IsaVJ4vLS2vbl1qHvDx0ERs";
   var base_url = "https://www.googleapis.com/calendar/v3/calendars/" + CALENDER_ID + "/events";
   var human_url = "https://www.google.com/calendar/embed?src=" + CALENDER_ID + "&ctz=Europe/Helsinki"
+  var base_tag = $("#mistaapua");
+  
+  var param_color_back  = base_tag.attr("mista-color-back")  || "#95C807"
+  var param_color_front = base_tag.attr("mista-color-front") || "#FFFFFF"
+  
+  var style_button="width:100%;background-color:"+param_color_back + ";color:" + param_color_front + ";";
+  var style_header="background-color:"+param_color_back + ";color:" + param_color_front + " ;";
+  
+  
   filter_max   = new Date( now + 2*24*60*60*1000 );
   filter_min   = new Date( now );
 
@@ -97,17 +102,17 @@ jQuery(document).ready(function($) {
          return;
        }
         
-       var elems = [ "<a class='pure-button' id='"+val.id+"' style='" + BUTTON_STYLE + "'> " + val.summary + "</a>" ];
+       var elems = [ "<a class='pure-button' id='"+val.id+"' style='" + style_button + "'> " + val.summary + "</a>" ];
        table_items.push( "<td style='border-left:none;'> " + elems.join("</td><td style='border-left:none;'>") + "</td>" );
        event_get_location( val.id );
     });
     if ( table_items.length == 0 )
     {
-       table_items.push( "<td style='border-left:none;'><a style='" + BUTTON_STYLE + "' class='pure-button' href='" + human_url  + "'> " + 
+       table_items.push( "<td style='border-left:none;'><a style='" + style_button + "' class='pure-button' href='" + human_url  + "'> " + 
                            get_localized_string("NO_OPEN") + "</div> </td>" );
     }
     var table_head = get_localized_string("HEADER") 
-    $("#mistaapua").append("<table class='pure-table'> <thead><tr style='" + HEADER_STYLE + "' ><th >" + table_head + "</th></td></thead><tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
+    $("#mistaapua").append("<table class='pure-table'> <thead><tr style='" + style_header + "' ><th >" + table_head + "</th></td></thead><tbody><tr>" + table_items.join("</tr><tr>") + "</tr></table>" );
    }); // get json
      
   }); // document ready

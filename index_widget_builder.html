@@ -1,0 +1,104 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/yahoo/pure-release/v0.6.0/pure-min.css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<script>
+
+
+$(document).ready( function(){
+
+var full_string_prefix = "<!--Include starts here -->\n<script>(function (window, document) {\n\
+var loader = function () {var script = document.createElement(\"script\"),tag = document.getElementsByTagName(\"script\")[0];\n\
+script.src = \"https://rawgit.com/susundberg/somejam-2015/master/mista_apua.js\";tag.parentNode.insertBefore(script, tag);};\n\
+window.addEventListener ? window.addEventListener(\"load\", loader, false) : window.attachEvent(\"onload\", loader);})\n\
+(window, document);<\/script>";
+
+   function update_color( item, color_front )
+   {
+      var color_back  = item.attr("mista-color-back");
+      var color_front = item.attr("mista-color-front");
+      item.attr("style", "width:100%;background-color:" + color_back + ";color:" + color_front + ";");
+      $("#sourcode").text( full_string_prefix + "\n<div id=\"mistaapua\" mista-color-back=\"" + color_back + "\" mista-color-front=\"" + color_front + "\"></div>\n<!--Include ends here -->\n");
+   }
+   
+   $("#color_front").change(function() {
+      var target_color =  $( this ).val();
+      $( ".mista-change-style" ).each(function( index ) {
+         $(this).attr("mista-color-front", target_color );
+         update_color( $(this) );
+      });
+   });
+   $("#color_back").change(function() {
+      var target_color =  $( this ).val();
+      $( ".mista-change-style" ).each(function( index ) {
+         $(this).attr("mista-color-back", target_color );
+         update_color( $(this) );
+      });
+   });
+
+
+  $( ".mista-change-style" ).each(function( index ) {
+    $(this).attr("mista-color-front", "#FFFFFF" );
+    $(this).attr("mista-color-back", "#95C807");
+    update_color( $(this) );
+  });
+
+
+});
+
+</script>
+
+
+<div class="pure-g">
+<div class="pure-u-1-2">
+    
+<h1> Select your colors! </h1>
+
+<form class="pure-form pure-form-stacked">
+    <fieldset>
+        <label for="color_front">Text color</label>
+        <input id="color_front" type="color" value="#FFFFFF">
+
+        <label for="color_back">Background color</label>
+        <input id="color_back" type="color" value="#95C807">
+    </fieldset>
+</form>
+
+</div>
+<div class="pure-u-1-2">
+
+
+<h1> It looks like: </h1>
+
+<table class="pure-table">
+ <thead><tr class="mista-change-style" ><th>Nyt avoinna olevat chatit:</th></tr>
+ </thead>
+ <tbody>
+ <tr><td style="border-left:none;"> 
+ <a class="pure-button mista-change-style" > Suunta-palvelu</a></td></tr>
+ <tr><td style="border-left:none;"> 
+ <a class="pure-button mista-change-style"  > Netari-chat</a>
+ </td></tr>
+ </tbody>
+ </table>
+
+</div>
+</div>
+
+<div class="pure-g">
+<div class="pure-u-1-1">
+<h1> Here is what you want to copy-paste:</h1>
+<pre class="code" data-language="html" id="sourcode"></pre>
+</div>
+</div>
+
+
+
+</body>
+</html>
+
